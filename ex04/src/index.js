@@ -1,26 +1,39 @@
 // Only change code below this line
 function sumFibonacci(num) {
-  // all odd numbers <= num
-  if (num < 0) {
+  if (num <= 0) {
     return 0;
   }
-  var fibonacci = [1, 1, 2, 3, 5, 8, 13, 21];
+  if (num === 1) {
+    return 1;
+  }
+
   var sum = 0;
-  for (var i = 0; i < fibonacci.length; i++) {
-    if (fibonacci[i] % 2 !== 0) {
-      sum += fibonacci[i];
-      if (sum >= num) {
-        break;
-      }
+
+  function fib(counter) {
+    if (counter === 2) {
+      return [1, 1];
+    } else {
+      const countArray = fib(counter - 1);
+      countArray.push(countArray[countArray.length - 2] + countArray[countArray.length - 1]);
+      return countArray;
+    }
+  }
+
+  var fibArray = fib(num);
+  
+  for (var i = 0; fibArray[i] <= num; i++) {
+    if (fibArray[i] % 2 !== 0) {
+      sum += fibArray[i];
     }
   }
   return sum;
 }
 // Only change code above this line
-//console.log(sumFibonacci(num));
-console.log(sumFibonacci(1));
-console.log(sumFibonacci(10));
-console.log(sumFibonacci(20));
-console.log(sumFibonacci(4));
-console.log(sumFibonacci(-5));
+
+console.log(sumFibonacci(1)); // Change this line
+console.log(sumFibonacci(10)); // Change this line
+console.log(sumFibonacci(20)); // Change this line
+console.log(sumFibonacci(4)); // Change this line
+console.log(sumFibonacci(-5)); // Change this line
+
 module.exports = sumFibonacci;
